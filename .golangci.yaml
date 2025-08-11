@@ -1,0 +1,47 @@
+config-version: 2
+linters:
+  default: none
+  enable:
+    - bodyclose
+    - canonicalheader
+    - cyclop
+    - decorder
+    - errcheck
+    - errchkjson
+    - errname
+    - errorlint
+    - gocognit
+    - gocritic
+    - godot
+    - godox
+    - iface
+    - ireturn
+    - lll
+    - loggercheck
+    - makezero
+    - misspell
+    - nilerr
+    - nilnil
+    - nlreturn
+    - paralleltest
+    - prealloc
+    - sloglint
+    - sqlclosecheck
+    - unconvert
+    - unused
+    - wrapcheck
+    - wsl_v5
+
+settings:
+  cyclop:
+    max-complexity: 15
+  decorder:
+    order:
+      - type
+      - const
+      - var
+      - func
+  gocognit:
+    min-complexity: 15
+  wsl_v5:
+    default: all
