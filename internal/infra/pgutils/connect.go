@@ -17,6 +17,7 @@ func OpenDB(ctx context.Context, dsn string) (*sql.DB, error) {
 	err = db.PingContext(ctx)
 	if err != nil {
 		db.Close()
+
 		return nil, fmt.Errorf("ping database: %w", err)
 	}
 
