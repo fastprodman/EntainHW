@@ -13,8 +13,8 @@ Processing and saving incoming requests with balance recalculation.
 Imagine that we have a users with the account balance.
 Your application should have 2 routes:
 
-`POST /user/{userId}/transaction` - Updates user balance
-`GET /user/{userId}/balance` - Gets current user balance
+- `POST /user/{userId}/transaction` - Updates user balance
+- `GET /user/{userId}/balance` - Gets current user balance
 
 The decision regarding database architecture, table structure and service architecture is made by you.
 

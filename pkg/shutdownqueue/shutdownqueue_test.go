@@ -242,8 +242,10 @@ func TestAddAfterShutdownReturnsClosed(t *testing.T) {
 
 	// New behavior: Add during/after shutdown is a no-op, not an error.
 	var ran bool
+
 	Add(func(ctx context.Context) error {
 		ran = true
+
 		return nil
 	})
 

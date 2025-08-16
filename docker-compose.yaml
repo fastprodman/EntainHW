@@ -19,6 +19,17 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
+  migrate:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile.migrate
+    container_name: migrate
+    env_file:
+      - .env.dev
+    depends_on:
+      postgres:
+        condition: service_healthy
+
   api:
     build:
       context: .
