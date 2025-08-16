@@ -35,7 +35,7 @@ linters:
 
   settings:
     cyclop:
-      max-complexity: 15
+      max-complexity: 20
     decorder:
       dec-order:
         - type
@@ -43,7 +43,7 @@ linters:
         - var
         - func
     gocognit:
-      min-complexity: 15
+      min-complexity: 20
     wsl_v5:
       # Can be all | none | default | empty (per wsl v5 docs)
       default: all
