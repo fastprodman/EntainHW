@@ -41,7 +41,7 @@ func (s *BalanceService) ProcessTransaction(ctx context.Context, transaction Tra
 		}
 
 		// 2) Lock user row
-		_, err = s.users.LockAndGetBalance(tx, transaction.UserID)
+		balance, err := s.users.LockAndGetBalance(tx, transaction.UserID)
 		if err != nil {
 			return fmt.Errorf("lock and get balance: %w", err)
 		}
@@ -55,6 +55,11 @@ func (s *BalanceService) ProcessTransaction(ctx context.Context, transaction Tra
 			}
 
 		case TxLose:
+			// pre-check against locked balance
+			if balance < transaction.AmountMinor {
+				return fmt.Errorf("pre-check decrease: %w", users.ErrInsufficientFunds)
+			}
+
 			err = s.users.DecreaseBalance(tx, transaction.UserID, transaction.AmountMinor)
 			if err != nil {
 				return fmt.Errorf("decrease balance: %w", err)
