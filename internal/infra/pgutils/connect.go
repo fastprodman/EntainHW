@@ -12,7 +12,7 @@ import (
 )
 
 func OpenDB(ctx context.Context, pgConfig *config.PostgresConfig) (*sql.DB, error) {
-	db, err := sql.Open("postgres", pgConfig.DSN)
+	db, err := sql.Open("pgx", pgConfig.DSN)
 	if err != nil {
 		return nil, fmt.Errorf("open connection: %w", err)
 	}
