@@ -141,6 +141,7 @@ curl -s -X POST "http://localhost:8080/user/1/transaction" \
 ## Possible improvements
 
 * **Add mocks** for services/repos and expand unit tests (e.g., using **mockery** to generate interfaces/mocks).
+* **Metrics and traces** OpenTelemetry metrics and tracing could be added.
 * **Provide a Go client library** for this API (typed requests/responses).
 
 ---
