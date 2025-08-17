@@ -1,0 +1,47 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: postgres
+    restart: unless-stopped
+    env_file:
+      - .env.dev
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: mydb
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "myuser", "-d", "mydb"]
+      interval: 2s
+      timeout: 2s
+      retries: 5
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  migrate:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile.migrate
+    container_name: migrate
+    env_file:
+      - .env.dev
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  api:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile.api
+    container_name: api
+    depends_on:
+      postgres:
+        condition: service_healthy
+    env_file:
+      - .env.dev
+    ports:
+      - "8080:8080"
+
+volumes:
+  postgres_data:
